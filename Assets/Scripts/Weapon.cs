@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+
+    public bool isActiveWeapon;
+
     //Shooting
     public bool isShooting, readyToShoot;
     bool allowReset = true;
@@ -24,12 +27,15 @@ public class Weapon : MonoBehaviour
     public float bulletPrefabLifeTime = 3f;
 
     public GameObject muzzleEffect;
-    private Animator animator;
+    internal Animator animator;
 
     //Loading
     public float reloadTime;
     public int magazineSize, bulletsLeft;
     public bool isRealoading;
+
+    public Vector3 spawnPosition;
+    public Vector3 spawnRotation;
 
     public enum WeaponModel
     {
@@ -59,42 +65,48 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        if(bulletsLeft == 0 && isShooting)
+        if (isActiveWeapon)
         {
-            SoundManager.Instance.emptyMagazineSound1911.Play();
-        }
 
-        if (currentShootingMode == ShootingMode.Auto)
-        {
-            isShooting = Input.GetKey(KeyCode.Mouse0);
+            GetComponent<Outline>().enabled = false;
 
-        }
-        else if (currentShootingMode == ShootingMode.Single ||
-            currentShootingMode == ShootingMode.Burst)
-        {
-            isShooting = Input.GetKeyDown(KeyCode.Mouse0);
-        }
+            if (bulletsLeft == 0 && isShooting)
+            {
+                SoundManager.Instance.emptyMagazineSound1911.Play();
+            }
 
-        if(Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && isRealoading == false)
-        {
-            Reload();
-        }
+            if (currentShootingMode == ShootingMode.Auto)
+            {
+                isShooting = Input.GetKey(KeyCode.Mouse0);
 
-        //If you want to automatically reload when magazine is empty
-        if (readyToShoot && isShooting == false && isRealoading == false && bulletsLeft <= 0)
-        {
-            //Reload();
-        }
+            }
+            else if (currentShootingMode == ShootingMode.Single ||
+                currentShootingMode == ShootingMode.Burst)
+            {
+                isShooting = Input.GetKeyDown(KeyCode.Mouse0);
+            }
 
-        if (readyToShoot && isShooting && bulletsLeft > 0)
-        {
-            burstBulletsLeft = bulletsPerBurst;
-            FireWeapon();
-        } 
+            if (Input.GetKeyDown(KeyCode.R) && bulletsLeft < magazineSize && isRealoading == false)
+            {
+                Reload();
+            }
 
-        if (AmmoManager.Instance.ammoDisplay != null)
-        {
-            AmmoManager.Instance.ammoDisplay.text = $"{bulletsLeft / bulletsPerBurst}/{magazineSize / bulletsPerBurst}";
+            //If you want to automatically reload when magazine is empty
+            if (readyToShoot && isShooting == false && isRealoading == false && bulletsLeft <= 0)
+            {
+                //Reload();
+            }
+
+            if (readyToShoot && isShooting && bulletsLeft > 0)
+            {
+                burstBulletsLeft = bulletsPerBurst;
+                FireWeapon();
+            }
+
+            if (AmmoManager.Instance.ammoDisplay != null)
+            {
+                AmmoManager.Instance.ammoDisplay.text = $"{bulletsLeft / bulletsPerBurst}/{magazineSize / bulletsPerBurst}";
+            } 
         }
     }
 

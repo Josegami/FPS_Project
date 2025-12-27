@@ -4803,6 +4803,7 @@ GameObject:
   - component: {fileID: 313692262555291041}
   - component: {fileID: 5535551044510214323}
   - component: {fileID: 8512093315687314122}
+  - component: {fileID: 7228156598455109492}
   m_Layer: 0
   m_Name: AutoLightWeapon
   m_TagString: Untagged
@@ -4915,6 +4916,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4854eb64060ea2d45b8f20dcb26f2f39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Weapon
+  isActiveWeapon: 0
   isShooting: 0
   readyToShoot: 0
   shootingDelay: 0.15
@@ -4930,6 +4932,8 @@ MonoBehaviour:
   magazineSize: 30
   bulletsLeft: 0
   isRealoading: 0
+  spawnPosition: {x: 0.45, y: -0.59, z: 0.73}
+  spawnRotation: {x: 0, y: 0, z: 0}
   thisWeaponModel: 1
   currentShootingMode: 2
 --- !u!95 &8512093315687314122
@@ -4940,7 +4944,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7547301661679754181}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 8761ff0a2d75a214bb9e919edf077695, type: 2}
   m_CullingMode: 0
@@ -4954,6 +4958,24 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &7228156598455109492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7547301661679754181}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &8877968908019459053
 GameObject:
   m_ObjectHideFlags: 0
