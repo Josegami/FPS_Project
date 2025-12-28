@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7932603736225740987}
   - component: {fileID: 5084884334158195748}
   - component: {fileID: 3571445034620291839}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MuzzleFlashEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4804,7 +4804,7 @@ GameObject:
   - component: {fileID: 5535551044510214323}
   - component: {fileID: 8512093315687314122}
   - component: {fileID: 7228156598455109492}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AutoLightWeapon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4985,7 +4985,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7830527619694568759}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
