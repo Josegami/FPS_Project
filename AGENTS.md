@@ -2,7 +2,7 @@
 - Project name: FPS_Project
 - Unity version: Unity 6000.2.6f2
 - Active game object:
-  - Name: HUDManager
+  - Name: AutoLightWeapon
   - Tag: Untagged
-  - Layer: Default
+  - Layer: WeaponRender
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
