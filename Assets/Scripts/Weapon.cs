@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
 {
 
     public bool isActiveWeapon;
+    public int weaponDamage;
 
     [Header("Shooting")]
     //Shooting
@@ -78,6 +79,8 @@ public class Weapon : MonoBehaviour
     {
         if (isActiveWeapon)
         {
+
+            SetLayerRecursively(gameObject, LayerMask.NameToLayer("WeaponRender"));
             if (Input.GetMouseButtonDown(1))
             {
                 EnterADS();
@@ -124,7 +127,22 @@ public class Weapon : MonoBehaviour
                 FireWeapon();
             }
         }
+        else
+        {
+            SetLayerRecursively(gameObject, LayerMask.NameToLayer("Default"));
+        }
     }
+
+    void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        obj.layer = newLayer;
+
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
+    }
+
 
 
     private void EnterADS()
@@ -166,6 +184,10 @@ public class Weapon : MonoBehaviour
 
         //Instatiate the bullet
         GameObject bullet = Instantiate(bulletsPrefab, bulletSpawn.position, Quaternion.identity);
+
+        Bullet bul = bullet.GetComponent<Bullet>();
+        bul.bulletDamage = weaponDamage;
+
         //Pointing the bullet to face the shooting direction
         bullet.transform.forward = shootingDirection;
         //Shoot

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
+
+    public int bulletDamage;
     public void OnCollisionEnter(Collision objectWeHit)
     {
         if (objectWeHit.gameObject.CompareTag("Target"))
@@ -27,6 +29,14 @@ public class Bullet : MonoBehaviour
             objectWeHit.gameObject.GetComponent<BeerBottle>().Shatter();
 
             //We will not destroy the bullet on impact
+        }
+        if (objectWeHit.gameObject.CompareTag("Enemy"))
+        {
+            print("hit bottle");
+
+            objectWeHit.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage);
+
+            Destroy(gameObject);
         }
     }
 
