@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: d66165920fad2784ebe11223f67f1217
+timeCreated: 1471698922
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 66223
+  packageName: Grenade M18 Smoke
+  packageVersion: 1.0.1
+  assetPath: Assets/3D Models/Props/Weapons/Grenades/M18/Prefabs/M18_Blue.prefab
+  uploadId: 741176

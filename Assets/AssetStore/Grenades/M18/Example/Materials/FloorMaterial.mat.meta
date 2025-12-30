@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: dd3fb5785244c95468bf8a7bf48dea5e
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 66223
+  packageName: Grenade M18 Smoke
+  packageVersion: 1.0.1
+  assetPath: Assets/3D Models/Props/Weapons/Grenades/M18/Example/Materials/FloorMaterial.mat
+  uploadId: 741176

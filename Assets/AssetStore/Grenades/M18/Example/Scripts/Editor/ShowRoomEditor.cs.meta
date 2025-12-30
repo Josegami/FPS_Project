@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a3eeb2bf9a60a124ca73340bcece9d4a
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 66223
+  packageName: Grenade M18 Smoke
+  packageVersion: 1.0.1
+  assetPath: Assets/3D Models/Props/Weapons/Grenades/M18/Example/Scripts/Editor/ShowRoomEditor.cs
+  uploadId: 741176

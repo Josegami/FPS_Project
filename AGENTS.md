@@ -2,7 +2,7 @@
 - Project name: FPS_Project
 - Unity version: Unity 6000.2.6f2
 - Active game object:
-  - Name: AutoLightWeapon
+  - Name: TacticalAmount
   - Tag: Untagged
-  - Layer: WeaponRender
+  - Layer: UI
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->
