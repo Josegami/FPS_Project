@@ -2,7 +2,7 @@
 - Project name: FPS_Project
 - Unity version: Unity 6000.2.6f2
 - Active game object:
-  - Name: Player
-  - Tag: Player
+  - Name: Wall Support
+  - Tag: Untagged
   - Layer: Default
 <!-- UNITY CODE ASSIST INSTRUCTIONS END -->

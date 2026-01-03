@@ -47,6 +47,7 @@ public class Weapon : MonoBehaviour
 
     bool isADS;
 
+
     public enum WeaponModel
     {
         Pistol,

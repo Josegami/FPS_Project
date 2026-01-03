@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     private Animator animator;
 
     private NavMeshAgent navAgent;
+    private Collider enemyCollider;
 
     public bool isDead;
 
@@ -15,6 +16,7 @@ public class Enemy : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
+        enemyCollider = GetComponent<Collider>();
     }
 
     public void TakeDamage(int damageAmount)
@@ -23,6 +25,8 @@ public class Enemy : MonoBehaviour
 
         if (HP <= 0)
         {
+            isDead = true;
+
             int randomValue = Random.Range(0, 2);
 
             if (randomValue == 0)
@@ -34,7 +38,10 @@ public class Enemy : MonoBehaviour
                 animator.SetTrigger("DIE2");
             }
 
-            isDead = true;
+            if (enemyCollider != null)
+            {
+                enemyCollider.enabled = false;
+            }
 
             //Dead Sound
             SoundManager.Instance.monsterChannel2.PlayOneShot(SoundManager.Instance.monsterDeath);

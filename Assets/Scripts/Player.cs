@@ -14,7 +14,9 @@ public class Player : MonoBehaviour
 
     public bool isDead;
 
-
+    [Header("Settings")]
+    [SerializeField] private float immunityTime = 1.0f;
+    private bool isInvincible = false; 
 
     private void Start()
     {
@@ -23,7 +25,11 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damageAmount)
     {
+        if (isDead || isInvincible) return;
+
         HP -= damageAmount;
+
+        StartCoroutine(BecomeInvincible());
 
         if (HP <= 0)
         {
@@ -40,7 +46,12 @@ public class Player : MonoBehaviour
 
         }
     }
-
+    private IEnumerator BecomeInvincible()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(immunityTime);
+        isInvincible = false;
+    }
     private void PlayerDead()
     {
         SoundManager.Instance.playerChannel.PlayOneShot(SoundManager.Instance.playerDie);
@@ -108,9 +119,13 @@ public class Player : MonoBehaviour
     {
         if (other.CompareTag("MonsterHand"))
         {
-            if(isDead == false)
+            if (!isDead && !isInvincible)
             {
-                TakeDamage(other.gameObject.GetComponent<MonsterHand>().damage);
+                MonsterHand hand = other.gameObject.GetComponent<MonsterHand>();
+                if (hand != null)
+                {
+                    TakeDamage(hand.damage);
+                }
             }
         }
     }

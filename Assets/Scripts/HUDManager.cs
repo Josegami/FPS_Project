@@ -22,6 +22,10 @@ public class HUDManager : MonoBehaviour
     public Image tacticalUI;
     public TextMeshProUGUI tacticalAmountUI;
 
+    [Header("Stamina")]
+    public Image staminaFill;
+    public PlayerMovement playerMovement;
+
     public Sprite emptySlot;
     public Sprite greySlot;
 
@@ -80,6 +84,8 @@ public class HUDManager : MonoBehaviour
         {
             lethalUI.sprite = greySlot;
         }
+
+        UpdateStaminaUI();
     }
 
     private Sprite GetWeaponSprite(Weapon.WeaponModel model)
@@ -145,4 +151,18 @@ public class HUDManager : MonoBehaviour
                 break;
         }
     }
+
+    private void UpdateStaminaUI()
+    {
+        if (playerMovement == null || staminaFill == null) return;
+
+        float targetFill = playerMovement.GetStaminaNormalized();
+
+        staminaFill.fillAmount = Mathf.Lerp(
+            staminaFill.fillAmount,
+            targetFill,
+            10f * Time.deltaTime
+        );
+    }
+
 }
