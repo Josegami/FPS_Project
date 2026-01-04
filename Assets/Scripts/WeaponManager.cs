@@ -118,18 +118,19 @@ public class WeaponManager : MonoBehaviour
 
     private void AddWeaponIntoActiveSlot(GameObject pickedupWeapon)
     {
-
         DropCurrentWeapon(pickedupWeapon);
 
         pickedupWeapon.transform.SetParent(activeWeaponSlot.transform, false);
 
         Weapon weapon = pickedupWeapon.GetComponent<Weapon>();
 
-        pickedupWeapon.transform.localPosition = new Vector3(weapon.spawnPosition.x, weapon.spawnPosition.y, weapon.spawnPosition.z);
-        pickedupWeapon.transform.localRotation = Quaternion.Euler(weapon.spawnRotation.x, weapon.spawnRotation.y, weapon.spawnRotation.z);
+        pickedupWeapon.transform.localPosition = weapon.spawnPosition;
+        pickedupWeapon.transform.localRotation = Quaternion.Euler(weapon.spawnRotation);
+
+        pickedupWeapon.transform.localScale = weapon.spawnScale;
 
         weapon.isActiveWeapon = true;
-        weapon.animator.enabled = true;
+        if (weapon.animator != null) weapon.animator.enabled = true;
     }
 
     private void DropCurrentWeapon(GameObject pickedupWeapon)
@@ -139,11 +140,15 @@ public class WeaponManager : MonoBehaviour
             var weaponToDrop = activeWeaponSlot.transform.GetChild(0).gameObject;
 
             weaponToDrop.GetComponent<Weapon>().isActiveWeapon = false;
-            weaponToDrop.GetComponent<Weapon>().animator.enabled = false;
+
+            if (weaponToDrop.GetComponent<Weapon>().animator != null)
+                weaponToDrop.GetComponent<Weapon>().animator.enabled = false;
 
             weaponToDrop.transform.SetParent(pickedupWeapon.transform.parent);
             weaponToDrop.transform.localPosition = pickedupWeapon.transform.localPosition;
             weaponToDrop.transform.localRotation = pickedupWeapon.transform.localRotation;
+
+            weaponToDrop.transform.localScale = Vector3.one;
         }
     }
 

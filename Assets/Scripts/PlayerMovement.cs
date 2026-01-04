@@ -4,124 +4,132 @@
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movement")]
-    public float walkSpeed = 10f;
-    public float acceleration = 10f;
-    public float airControlMultiplier = 0.6f;
+    public float walkSpeed = 6f;
+    public float sprintSpeed = 10f;
+    public float acceleration = 12f;
 
-    [Header("Jumping")]
-    public float jumpHeight = 2.5f;
-    public int maxJumps = 2;
+    [Header("Jump & Gravity")]
+    public float jumpHeight = 2.2f;
+    public float gravity = -30f;
 
-    [Header("Gravity")]
-    public float gravity = -25f;
+    [Header("Mouse Look")]
+    public Transform cameraPivot;
+    public float mouseSensitivity = 2.5f;
+    public float maxLookUp = 80f;
+    public float maxLookDown = -80f;
 
-    [Header("Ground Check")]
+    [Header("Detection")]
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
 
     [Header("Stamina")]
     public float maxStamina = 100f;
-    public float staminaDrainPerSecond = 30f;
+    public float staminaDrainPerSecond = 25f;
     public float staminaRegenPerSecond = 20f;
-    [Range(0f, 1f)] public float sprintRecoveryThreshold = 0.25f; 
+    [Range(0f, 1f)] public float sprintRecoveryThreshold = 0.25f;
 
-    [Header("Sprint")]
-    public float sprintSpeed = 18f;
-
-    [Header("Camera")]
+    [Header("FOV Settings")]
     public Camera playerCamera;
-    public float normalFOV = 75f;
-    public float sprintFOV = 90f;
-    public float fovLerpSpeed = 8f;
+    public float normalFOV = 60f;   
+    public float sprintFOV = 75f;    
+    public float fovSpeed = 10f;    
 
     private CharacterController controller;
-    private Vector3 velocity;
+    private Vector3 verticalVelocity;
     private Vector3 currentMoveVelocity;
 
+    private float xRotation;
     private bool isGrounded;
-    private int jumpsRemaining;
     private bool isSprinting;
 
     private float currentStamina;
-    private bool canSprint = true; 
+    private bool canSprint = true;
+
+    [SerializeField] private Animator animator;
 
     void Start()
     {
         controller = GetComponent<CharacterController>();
-        jumpsRemaining = maxJumps;
+        animator = GetComponentInChildren<Animator>();
+
         currentStamina = maxStamina;
 
-        if (playerCamera != null)
-            playerCamera.fieldOfView = normalFOV;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     void Update()
     {
         HandleGroundCheck();
-        HandleMovement();
-        HandleJump();
-        HandleGravity();
+        HandleMouseLook();
+        HandleMovementAndGravity();
         HandleStamina();
-        HandleCameraFOV();
+        HandleFOV();
     }
 
     void HandleGroundCheck()
     {
-        isGrounded = Physics.CheckSphere(
-            groundCheck.position,
-            groundDistance,
-            groundMask
-        );
+        if (groundCheck != null)
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        else
+            isGrounded = controller.isGrounded;
 
-        if (isGrounded)
-        {
-            if (velocity.y < 0)
-                velocity.y = -2f;
-
-            jumpsRemaining = maxJumps;
-        }
+        if (isGrounded && verticalVelocity.y < 0)
+            verticalVelocity.y = -2f;
     }
 
-    void HandleMovement()
+    void HandleMouseLook()
+    {
+        float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
+
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, maxLookDown, maxLookUp);
+        cameraPivot.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        transform.Rotate(Vector3.up * mouseX);
+    }
+
+    void HandleMovementAndGravity()
     {
         float x = Input.GetAxisRaw("Horizontal");
         float z = Input.GetAxisRaw("Vertical");
 
-        Vector3 inputDirection = (transform.right * x + transform.forward * z).normalized;
+        Vector3 inputDir = (transform.right * x + transform.forward * z).normalized;
 
-        isSprinting = Input.GetKey(KeyCode.LeftShift)
-                      && canSprint
-                      && z > 0f
-                      && inputDirection.magnitude > 0.1f;
+        isSprinting = Input.GetKey(KeyCode.LeftShift) && canSprint && z > 0.1f && inputDir.magnitude > 0.1f;
 
         float targetSpeed = isSprinting ? sprintSpeed : walkSpeed;
-        Vector3 targetVelocity = inputDirection * targetSpeed;
+        Vector3 targetVelocity = inputDir * targetSpeed;
 
-        float control = isGrounded ? 1f : airControlMultiplier;
+        currentMoveVelocity = Vector3.Lerp(currentMoveVelocity, targetVelocity, acceleration * Time.deltaTime);
 
-        currentMoveVelocity = Vector3.Lerp(
-            currentMoveVelocity,
-            targetVelocity,
-            acceleration * control * Time.deltaTime
-        );
-
-        controller.Move(currentMoveVelocity * Time.deltaTime);
-    }
-
-    void HandleJump()
-    {
-        if (Input.GetButtonDown("Jump") && jumpsRemaining > 0)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            jumpsRemaining--;
+            verticalVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+
+        verticalVelocity.y += gravity * Time.deltaTime;
+
+        controller.Move((currentMoveVelocity + verticalVelocity) * Time.deltaTime);
+
+        if (animator != null)
+        {
+            Vector3 localVel = transform.InverseTransformDirection(currentMoveVelocity);
+            animator.SetFloat("VelocityX", localVel.x);
+            animator.SetFloat("VelocityZ", localVel.z);
         }
     }
 
-    void HandleGravity()
+    void HandleFOV()
     {
-        velocity.y += gravity * Time.deltaTime;
-        controller.Move(velocity * Time.deltaTime);
+        if (playerCamera == null) return;
+
+        bool isMoving = controller.velocity.magnitude > 0.1f;
+        float targetFOV = (isSprinting && isMoving) ? sprintFOV : normalFOV;
+
+        playerCamera.fieldOfView = Mathf.Lerp(playerCamera.fieldOfView, targetFOV, fovSpeed * Time.deltaTime);
     }
 
     void HandleStamina()
@@ -129,42 +137,21 @@ public class PlayerMovement : MonoBehaviour
         if (isSprinting)
         {
             currentStamina -= staminaDrainPerSecond * Time.deltaTime;
-
             if (currentStamina <= 0f)
             {
                 currentStamina = 0f;
-                canSprint = false; 
+                canSprint = false;
             }
         }
         else
         {
             currentStamina += staminaRegenPerSecond * Time.deltaTime;
-
-            
             if (currentStamina >= maxStamina * sprintRecoveryThreshold)
-            {
                 canSprint = true;
-            }
         }
 
         currentStamina = Mathf.Clamp(currentStamina, 0f, maxStamina);
     }
 
-    void HandleCameraFOV()
-    {
-        if (playerCamera == null) return;
-
-        float targetFOV = isSprinting ? sprintFOV : normalFOV;
-        playerCamera.fieldOfView = Mathf.Lerp(
-            playerCamera.fieldOfView,
-            targetFOV,
-            fovLerpSpeed * Time.deltaTime
-        );
-    }
-
-    // Para UI
-    public float GetStaminaNormalized()
-    {
-        return currentStamina / maxStamina;
-    }
+    public float GetStaminaNormalized() => currentStamina / maxStamina;
 }

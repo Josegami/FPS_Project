@@ -10,6 +10,8 @@ public class Enemy : MonoBehaviour
     private NavMeshAgent navAgent;
     private Collider enemyCollider;
 
+    private MonsterHand monsterHand;
+
     public bool isDead;
 
     private void Start()
@@ -41,6 +43,7 @@ public class Enemy : MonoBehaviour
             if (enemyCollider != null)
             {
                 enemyCollider.enabled = false;
+                monsterHand.GetComponent<Collider>().enabled = false;
             }
 
             //Dead Sound

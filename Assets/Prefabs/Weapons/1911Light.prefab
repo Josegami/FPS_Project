@@ -30,8 +30,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.70418656, y: 0.06419752, z: -0.06419752, w: 0.70418656}
   m_LocalPosition: {x: 11.9579, y: 2.551, z: 22.42}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3908408258663574415}
   - {fileID: 6659395819981961958}
@@ -94,6 +94,7 @@ MonoBehaviour:
   isRealoading: 0
   spawnPosition: {x: 0.33, y: -0.6, z: 1.037}
   spawnRotation: {x: 0, y: -90, z: 0}
+  spawnScale: {x: 1, y: 1, z: 1}
   thisWeaponModel: 0
   currentShootingMode: 0
 --- !u!95 &4171931378951240862

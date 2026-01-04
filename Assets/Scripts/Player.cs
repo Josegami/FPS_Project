@@ -59,7 +59,6 @@ public class Player : MonoBehaviour
         SoundManager.Instance.playerChannel.clip = SoundManager.Instance.gameOverMusic;
         SoundManager.Instance.playerChannel.PlayDelayed(2f);
 
-        //GetComponent<MouseMovement>().enabled = false;
         GetComponent<PlayerMovement>().enabled = false;
 
         //Dying Animation

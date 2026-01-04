@@ -64,7 +64,7 @@ public class MonsterPatrolingState : StateMachineBehaviour
         // --- Transition to Chase State --- //
 
         float distanceFromPlayer = Vector3.Distance(player.position, animator.transform.position);
-        if (distanceFromPlayer < detectionArea)
+        if (distanceFromPlayer < detectionArea || animator.GetBool("isChasing"))
         {
             animator.SetBool("isChasing", true);
         }
