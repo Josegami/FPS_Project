@@ -1980,7 +1980,6 @@ GameObject:
   - component: {fileID: 6042561750174557219}
   - component: {fileID: 8592230317730949933}
   - component: {fileID: 4903719654609339093}
-  - component: {fileID: 7057013517853191156}
   - component: {fileID: 754688824624929548}
   - component: {fileID: 6208487687187738834}
   - component: {fileID: 1154919427115045294}
@@ -2044,18 +2043,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Monster
   HP: 75
   isDead: 0
---- !u!114 &7057013517853191156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7827518241223047488}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe4bc2bd796e2fa488d52ef90c386587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ClickToMove
 --- !u!195 &754688824624929548
 NavMeshAgent:
   m_ObjectHideFlags: 0

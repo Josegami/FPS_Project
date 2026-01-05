@@ -6,10 +6,15 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    public int HP = 100;
     public GameObject bloodyScreen;
 
-    public TextMeshProUGUI playerHealthUI;
+    [Header("Health")]
+    public int HP = 100;
+    public Image healthFill;
+    public int maxHP = 100;
+
+    public Animator animator;
+
     public GameObject gameOverUI;
 
     public bool isDead;
@@ -20,7 +25,14 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        //playerHealthUI.text = $"Health: {HP}";
+        Application.targetFrameRate = 60; // Limita el juego a 60fps para ahorrar recursos
+
+        maxHP = HP;
+    }
+
+    private void Update()
+    {
+        HandleHealthBarSmooth();
     }
 
     public void TakeDamage(int damageAmount)
@@ -41,7 +53,6 @@ public class Player : MonoBehaviour
         {
             print("Player hit");
             StartCoroutine(BloodyScreenEffect());
-            playerHealthUI.text = $"Health: {HP}";
             SoundManager.Instance.playerChannel.PlayOneShot(SoundManager.Instance.playerHurt);
 
         }
@@ -61,9 +72,7 @@ public class Player : MonoBehaviour
 
         GetComponent<PlayerMovement>().enabled = false;
 
-        //Dying Animation
-        GetComponentInChildren<Animator>().enabled = true;
-        playerHealthUI.gameObject.SetActive(false);
+        animator.SetTrigger("DEAD");
 
         GetComponent<ScreenBlacout>().StartFade();
         StartCoroutine(ShowGameOverUI());
@@ -127,5 +136,14 @@ public class Player : MonoBehaviour
                 }
             }
         }
+    }
+
+    // Hace que la barra baje suavemente
+    private void HandleHealthBarSmooth()
+    {
+        if (healthFill == null) return;
+
+        float targetFill = (float)HP / maxHP;
+        healthFill.fillAmount = Mathf.Lerp(healthFill.fillAmount, targetFill, 5f * Time.deltaTime);
     }
 }

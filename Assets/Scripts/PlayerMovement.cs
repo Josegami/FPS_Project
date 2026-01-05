@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour
 
         controller.Move((currentMoveVelocity + verticalVelocity) * Time.deltaTime);
 
-        if (animator != null)
+        if (animator != null && animator.hasBoundPlayables)
         {
             Vector3 localVel = transform.InverseTransformDirection(currentMoveVelocity);
             animator.SetFloat("VelocityX", localVel.x);

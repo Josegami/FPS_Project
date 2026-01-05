@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-
     public bool isActiveWeapon;
     public int weaponDamage;
 
@@ -42,12 +41,13 @@ public class Weapon : MonoBehaviour
     public int magazineSize, bulletsLeft;
     public bool isRealoading;
 
+    [Header("Transform Settings")]
     public Vector3 spawnPosition;
     public Vector3 spawnRotation;
-    public Vector3 spawnScale;
+    public Vector3 spawnScale; // Custom scale for each weapon
 
     bool isADS;
-
+    private bool lastActiveState; // Track state changes
 
     public enum WeaponModel
     {
@@ -75,14 +75,22 @@ public class Weapon : MonoBehaviour
         bulletsLeft = magazineSize;
 
         spreadIntensity = hipSpreadIntensity;
+
+        lastActiveState = !isActiveWeapon; // Initialize state tracker
     }
 
     void Update()
     {
+        // Update visuals only when state changes (Fixes crashes)
+        if (isActiveWeapon != lastActiveState)
+        {
+            UpdateWeaponVisuals();
+            lastActiveState = isActiveWeapon;
+        }
+
         if (isActiveWeapon)
         {
-
-            SetLayerRecursively(gameObject, LayerMask.NameToLayer("WeaponRender"));
+            // Handle Inputs
             if (Input.GetMouseButtonDown(1))
             {
                 EnterADS();
@@ -92,7 +100,6 @@ public class Weapon : MonoBehaviour
             {
                 ExitADS();
             }
-
 
             GetComponent<Outline>().enabled = false;
 
@@ -104,7 +111,6 @@ public class Weapon : MonoBehaviour
             if (currentShootingMode == ShootingMode.Auto)
             {
                 isShooting = Input.GetKey(KeyCode.Mouse0);
-
             }
             else if (currentShootingMode == ShootingMode.Single ||
                 currentShootingMode == ShootingMode.Burst)
@@ -129,6 +135,15 @@ public class Weapon : MonoBehaviour
                 FireWeapon();
             }
         }
+    }
+
+    // Optimization: avoid running this every frame
+    private void UpdateWeaponVisuals()
+    {
+        if (isActiveWeapon)
+        {
+            SetLayerRecursively(gameObject, LayerMask.NameToLayer("WeaponRender"));
+        }
         else
         {
             SetLayerRecursively(gameObject, LayerMask.NameToLayer("Default"));
@@ -144,8 +159,6 @@ public class Weapon : MonoBehaviour
             SetLayerRecursively(child.gameObject, newLayer);
         }
     }
-
-
 
     private void EnterADS()
     {
@@ -224,19 +237,17 @@ public class Weapon : MonoBehaviour
 
     private void ReloadCompleted()
     {
-        if(WeaponManager.Instance.CheckAmmoLeftFor(thisWeaponModel) > magazineSize)
-        {
-            bulletsLeft = magazineSize;
-            WeaponManager.Instance.DecreaseTotalAmmo(bulletsLeft, thisWeaponModel);
-        }
-        else
-        {
-            bulletsLeft = WeaponManager.Instance.CheckAmmoLeftFor(thisWeaponModel);
-            WeaponManager.Instance.DecreaseTotalAmmo(bulletsLeft, thisWeaponModel);
-        }
+        // Calculate needed ammo
+        int ammoNeeded = magazineSize - bulletsLeft;
+        int ammoAvailable = WeaponManager.Instance.CheckAmmoLeftFor(thisWeaponModel);
+        int ammoToFill = Math.Min(ammoNeeded, ammoAvailable);
+
+        bulletsLeft += ammoToFill;
+        WeaponManager.Instance.DecreaseTotalAmmo(ammoToFill, thisWeaponModel);
 
         isRealoading = false;
     }
+
     private void ResetShot()
     {
         readyToShoot = true;
@@ -246,7 +257,6 @@ public class Weapon : MonoBehaviour
     public Vector3 CalculateDirectionAndSpread()
     {
         // Shooting from the middle of the screen to check where are we pointing at
-        // Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
@@ -277,6 +287,6 @@ public class Weapon : MonoBehaviour
     private IEnumerator DestroyBulletAfterTime(GameObject bullet, float delay)
     {
         yield return new WaitForSeconds(delay);
-        Destroy(bullet);
+        if (bullet != null) Destroy(bullet); // Safe destroy
     }
 }

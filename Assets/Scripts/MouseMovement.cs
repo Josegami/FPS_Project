@@ -7,7 +7,6 @@ public class MouseMovement : MonoBehaviour
     public Transform playerBody;
 
     float xRotation = 0f;
-    float yRotation = 0f;
 
     public float topClamp = -90f;
     public float bottomClamp = 90f;
