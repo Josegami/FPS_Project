@@ -72,7 +72,9 @@ public class Player : MonoBehaviour
 
         GetComponent<PlayerMovement>().enabled = false;
 
-        animator.SetTrigger("DEAD");
+        //animator.SetTrigger("DEAD");
+
+        HUDManager.Instance.HideHUD();
 
         GetComponent<ScreenBlacout>().StartFade();
         StartCoroutine(ShowGameOverUI());

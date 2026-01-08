@@ -165,4 +165,8 @@ public class HUDManager : MonoBehaviour
         );
     }
 
+    internal void HideHUD()
+    {
+        HUDManager.Instance.enabled = false;
+    }
 }
