@@ -1366,7 +1366,6 @@ GameObject:
   - component: {fileID: 2357681181362304943}
   - component: {fileID: 3856584657735334054}
   - component: {fileID: 5441662300596861335}
-  - component: {fileID: 7031542638968460890}
   - component: {fileID: 7820511306697424094}
   - component: {fileID: 8361749173515740879}
   - component: {fileID: 628928473108376600}
@@ -1429,20 +1428,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e3b10c6acd9e8b4181cc39283c03d12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
-  HP: 100
+  HP: 125
   isDead: 0
---- !u!114 &7031542638968460890
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6711096690386049596}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe4bc2bd796e2fa488d52ef90c386587, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ClickToMove
+  heartPrefab: {fileID: 6768607106082462014, guid: 858e4b834fcabc44bad9be85a504b56c, type: 3}
+  dropChance: 25
 --- !u!195 &7820511306697424094
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1463,7 +1452,7 @@ NavMeshAgent:
   m_AutoRepath: 1
   m_Height: 1.7
   m_BaseOffset: 0
-  m_WalkableMask: 4294967295
+  m_WalkableMask: 1
   m_ObstacleAvoidanceType: 4
 --- !u!136 &8361749173515740879
 CapsuleCollider:
@@ -1501,7 +1490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Monster
   monsterHand: {fileID: 7881479865105019761}
-  monsterDamage: 25
+  monsterDamage: 50
 --- !u!82 &6026065900575052228
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1513,7 +1502,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 168c9a5ac7025814ea9c89e5098a3cad, type: 3}
+  m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
