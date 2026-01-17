@@ -140,12 +140,23 @@ public class Player : MonoBehaviour
         }
     }
 
-    // Hace que la barra baje suavemente
     private void HandleHealthBarSmooth()
     {
         if (healthFill == null) return;
 
         float targetFill = (float)HP / maxHP;
         healthFill.fillAmount = Mathf.Lerp(healthFill.fillAmount, targetFill, 5f * Time.deltaTime);
+    }
+
+    public void Heal(int amount)
+    {
+        if (isDead) return;
+
+        HP += amount;
+
+        if (HP > maxHP)
+        {
+            HP = maxHP;
+        }
     }
 }

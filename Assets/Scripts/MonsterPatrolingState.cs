@@ -43,7 +43,7 @@ public class MonsterPatrolingState : StateMachineBehaviour
         if (SoundManager.Instance.monsterChannel.isPlaying == false)
         {
             SoundManager.Instance.monsterChannel.clip = SoundManager.Instance.monsterWalking;
-            SoundManager.Instance.monsterChannel.PlayDelayed(1f);
+            //SoundManager.Instance.monsterChannel.PlayDelayed(1f);
         }
 
         // --- If agent arrived at waypoints, move to next waypoints --- //

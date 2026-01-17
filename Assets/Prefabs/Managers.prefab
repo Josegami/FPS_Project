@@ -60,8 +60,8 @@ MonoBehaviour:
   emptyMagazineSound1911: {fileID: 1674115940088027014}
   throwablesChannel: {fileID: 2466227032715515154}
   grenadeSound: {fileID: 8300000, guid: 020745dc5d0ecab4882c7519cbcb1373, type: 3}
-  monsterChannel: {fileID: 2788959834547759942}
-  monsterChannel2: {fileID: 809497125117033704}
+  monsterChannel: {fileID: 0}
+  monsterChannel2: {fileID: 0}
   monsterWalking: {fileID: 8300000, guid: 168c9a5ac7025814ea9c89e5098a3cad, type: 3}
   monsterChase: {fileID: 8300000, guid: e1e7f406c66d0c34f94726e83f3b5cbd, type: 3}
   monsterAttack: {fileID: 8300000, guid: bc2baab908f1b004691a6ecf7044f61c, type: 3}
@@ -576,9 +576,9 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  DopplerLevel: 0
+  MinDistance: 3
+  MaxDistance: 40
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -613,7 +613,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -673,9 +673,9 @@ AudioSource:
   Spatialize: 0
   SpatializePostEffects: 0
   Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  DopplerLevel: 0
+  MinDistance: 3
+  MaxDistance: 40
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -710,7 +710,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
