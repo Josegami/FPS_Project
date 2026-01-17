@@ -25,6 +25,9 @@ public class EnergyCell : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             CompleteMission();
+
+            SoundManager.Instance.playerChannel.clip = SoundManager.Instance.missionCompletedMusic;
+            SoundManager.Instance.playerChannel.PlayDelayed(2f);
         }
     }
 

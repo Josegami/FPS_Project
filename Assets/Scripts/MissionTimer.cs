@@ -45,6 +45,9 @@ public class MissionTimer : MonoBehaviour
         {
             missionCompletePanel.SetActive(true);
 
+            SoundManager.Instance.playerChannel.clip = SoundManager.Instance.missionCompletedMusic;
+            SoundManager.Instance.playerChannel.PlayDelayed(2f);
+
             Time.timeScale = 0f;
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;

@@ -32,6 +32,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip playerDie;
 
     public AudioClip gameOverMusic;
+    public AudioClip missionCompletedMusic;
 
     private void Awake()
     {

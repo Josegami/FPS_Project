@@ -6,8 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: bfe4de592aec8ff4c9f326723b3e83f3
+  - enabled: 1
+    path: Assets/Scenes/SelectMision.unity
+    guid: 88296bef35b8bc24f95fcf69477e40f0
+  - enabled: 1
+    path: Assets/Scenes/Level1.unity
+    guid: faf37a4ebf1385e4ba5d512a37243e1c
+  - enabled: 1
     path: Assets/Scenes/Level2.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Level3.unity
+    guid: 3acfd9c553da9e549b4de0b5ebe5a1f4
+  - enabled: 1
+    path: Assets/Scenes/InfiniteMode.unity
+    guid: 5bc9a17f266e9824c916f0f04a93d151
+  - enabled: 1
+    path: Assets/Scenes/ShootTrain.unity
+    guid: d227b94ac4c25194d98aa06bf68a69ab
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 313d743c089590849a8b2b0846c8eee4, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}

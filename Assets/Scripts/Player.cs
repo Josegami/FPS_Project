@@ -76,6 +76,9 @@ public class Player : MonoBehaviour
 
         HUDManager.Instance.HideHUD();
 
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         GetComponent<ScreenBlacout>().StartFade();
         StartCoroutine(ShowGameOverUI());
     }

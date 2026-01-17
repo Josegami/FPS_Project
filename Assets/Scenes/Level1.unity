@@ -1506,6 +1506,17 @@ Transform:
   - {fileID: 1701902465}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &628026117 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7628260148092208575, guid: 01c2d8a3bde16e048a63df3366fb325d, type: 3}
+  m_PrefabInstance: {fileID: 105068821559128717}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 331027dca8d957d4896c13b1b4f715ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1001 &653752303
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3042,7 +3053,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.26666668
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: 38c890fc56d153d469c6e4806e41100e, type: 2}
   m_BuildHeightMesh: 0
@@ -12167,10 +12178,26 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2095512859920298799, guid: fc3b8e0a48344494282e8bcba79cc69d, type: 3}
+      propertyPath: m_text
+      value: "\t\n\tMision 1:\nFind the Base"
+      objectReference: {fileID: 0}
+    - target: {fileID: 2842496201385932569, guid: fc3b8e0a48344494282e8bcba79cc69d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 628026117}
+    - target: {fileID: 4360230816916722667, guid: fc3b8e0a48344494282e8bcba79cc69d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 628026117}
     - target: {fileID: 5923729013817664114, guid: fc3b8e0a48344494282e8bcba79cc69d, type: 3}
       propertyPath: m_Name
       value: UI
       objectReference: {fileID: 0}
+    - target: {fileID: 6678056092423084356, guid: fc3b8e0a48344494282e8bcba79cc69d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 628026117}
     - target: {fileID: 8540330058668540320, guid: fc3b8e0a48344494282e8bcba79cc69d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 40.31521
@@ -12211,6 +12238,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8946554025601963571, guid: fc3b8e0a48344494282e8bcba79cc69d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 628026117}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

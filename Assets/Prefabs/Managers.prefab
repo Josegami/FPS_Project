@@ -71,6 +71,7 @@ MonoBehaviour:
   playerHurt: {fileID: 8300000, guid: f54c200dfb088a149ad1b5082827c330, type: 3}
   playerDie: {fileID: 8300000, guid: e443be705ff37f74c8c05ec4de73bc96, type: 3}
   gameOverMusic: {fileID: 8300000, guid: f0acdf2da46c31443a59abdfaeb620c5, type: 3}
+  missionCompletedMusic: {fileID: 8300000, guid: e3ac681841fe8354fac20fc9738aa83c, type: 3}
 --- !u!82 &9185554755780749080
 AudioSource:
   m_ObjectHideFlags: 0
@@ -923,6 +924,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 3444083916089343156}
   - {fileID: 8393303892344826313}
   - {fileID: 3308708347988047471}
   - {fileID: 8930891347125099882}
@@ -986,11 +988,11 @@ MonoBehaviour:
   forceMultiplierLimit: 2
   maxLethals: 2
   lethalsCount: 0
-  equippedLethalType: 0
+  equippedLethalType: 1
   grenadePrefab: {fileID: 5423943862562692965, guid: b16779f72d8b3024c98a50a983799569, type: 3}
   maxTacticals: 2
   tacticalCount: 0
-  equippedTacticalType: 0
+  equippedTacticalType: 2
   smokeGrenadePrefab: {fileID: 6822096102742470368, guid: 7201f57be43aace47a62a3dc02cdd832, type: 3}
 --- !u!1 &5568509222757932927
 GameObject:
@@ -1040,6 +1042,50 @@ MonoBehaviour:
   grenadeExplosionEffect: {fileID: 100006, guid: 4575df893a6e3f64a8283dee38413a34, type: 3}
   smokeGrenadeEffect: {fileID: 100000, guid: 4ecfa3d3919108f4fbff80d1c4d920a1, type: 3}
   bloodSprayEffect: {fileID: 5566125407317051687, guid: db2b0b14a81d62d47a3b6a354cf09c7b, type: 3}
+--- !u!1 &7178243774022951293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3444083916089343156}
+  - component: {fileID: 7628260148092208575}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3444083916089343156
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7178243774022951293}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 948.9102, y: 393.44193, z: -21.80182}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8665301944267347946}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7628260148092208575
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7178243774022951293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 331027dca8d957d4896c13b1b4f715ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
 --- !u!1 &8201680701179482489
 GameObject:
   m_ObjectHideFlags: 0

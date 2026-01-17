@@ -26,6 +26,9 @@ public class MissionEndTrigger : MonoBehaviour
         if (missionCompletePanel != null)
             missionCompletePanel.SetActive(true);
 
+        SoundManager.Instance.playerChannel.clip = SoundManager.Instance.missionCompletedMusic;
+        SoundManager.Instance.playerChannel.PlayDelayed(2f);
+
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
