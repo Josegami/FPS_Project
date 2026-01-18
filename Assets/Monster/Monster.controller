@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   chaseSpeed: 6
-  stopChasingDistance: 21
+  stopChasingDistance: 101
   attackingDistance: 2.5
 --- !u!1101 &-6578110610914562605
 AnimatorStateTransition:
@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ZombieIdleState
   idleTime: 4
-  detectionAreaRadius: 18
+  detectionAreaRadius: 100
 --- !u!1102 &-356790733225673296
 AnimatorState:
   serializedVersion: 6
@@ -543,7 +543,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   patrolingTime: 10
-  detectionArea: 18
+  detectionArea: 100
   patrolSpeed: 0.8
 --- !u!1101 &7883305645131181248
 AnimatorStateTransition:
