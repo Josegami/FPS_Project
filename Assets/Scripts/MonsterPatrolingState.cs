@@ -10,6 +10,7 @@ public class MonsterPatrolingState : StateMachineBehaviour
 
     Transform player;
     NavMeshAgent agent;
+    Enemy enemyScript;
 
     public float detectionArea = 18f;
     public float patrolSpeed = 1.5f;
@@ -21,6 +22,8 @@ public class MonsterPatrolingState : StateMachineBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = animator.GetComponent<NavMeshAgent>();
+
+        enemyScript = animator.GetComponent<Enemy>();
 
         agent.speed = patrolSpeed;
         timer = 0;
@@ -40,10 +43,13 @@ public class MonsterPatrolingState : StateMachineBehaviour
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        if (SoundManager.Instance.monsterChannel.isPlaying == false)
+        if (enemyScript != null && enemyScript.myAudioSource != null)
         {
-            SoundManager.Instance.monsterChannel.clip = SoundManager.Instance.monsterWalking;
-            //SoundManager.Instance.monsterChannel.PlayDelayed(1f);
+            if (enemyScript.myAudioSource.isPlaying == false)
+            {
+                enemyScript.myAudioSource.clip = enemyScript.monsterWalking;
+                enemyScript.myAudioSource.Play();
+            }
         }
 
         // --- If agent arrived at waypoints, move to next waypoints --- //
@@ -75,7 +81,10 @@ public class MonsterPatrolingState : StateMachineBehaviour
         // Stop the agent
         agent.SetDestination(agent.transform.position);
 
-        SoundManager.Instance.monsterChannel.Stop();
+        if (enemyScript != null && enemyScript.myAudioSource != null)
+        {
+            enemyScript.myAudioSource.Stop();
+        }
 
     }
 }

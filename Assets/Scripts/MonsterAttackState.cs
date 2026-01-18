@@ -7,6 +7,8 @@ public class MonsterAttackState : StateMachineBehaviour
 {
     Transform player;
     NavMeshAgent agent;
+    Enemy enemyScript;
+
 
     public float stopAttackingDistance = 2.5f;
 
@@ -16,14 +18,17 @@ public class MonsterAttackState : StateMachineBehaviour
 
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = animator.GetComponent<NavMeshAgent>();
+
+        enemyScript = animator.GetComponent<Enemy>();
+
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        if (SoundManager.Instance.monsterChannel.isPlaying == false)
+        if (enemyScript.myAudioSource.isPlaying == false)
         {
-            SoundManager.Instance.monsterChannel.PlayOneShot(SoundManager.Instance.monsterAttack);
+            enemyScript.myAudioSource.PlayOneShot(enemyScript.monsterAttack);
         }
 
         LookAtPlayer();
@@ -51,6 +56,6 @@ public class MonsterAttackState : StateMachineBehaviour
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        SoundManager.Instance.monsterChannel.Stop();
+        enemyScript.myAudioSource.Stop();
     }
 }

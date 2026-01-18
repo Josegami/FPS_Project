@@ -24,12 +24,19 @@ public class Bullet : MonoBehaviour
         // --- Hit Enemy Optimized --- //
         if (objectWeHit.gameObject.CompareTag("Enemy"))
         {
-            // TryGetComponent es más eficiente y evita errores de nulos en Unity 6
             if (objectWeHit.gameObject.TryGetComponent<Enemy>(out Enemy enemy))
             {
                 if (!enemy.isDead)
                 {
-                    enemy.TakeDamage(bulletDamage);
+                    int finalDamage = bulletDamage;
+
+                    Player player = FindObjectOfType<Player>();
+                    if (player != null && player.isBerserkActive)
+                    {
+                        finalDamage = Mathf.RoundToInt(bulletDamage * player.damageMultiplier);
+                    }
+
+                    enemy.TakeDamage(finalDamage);
                     CreateBloodSprayEffect(objectWeHit);
                 }
             }

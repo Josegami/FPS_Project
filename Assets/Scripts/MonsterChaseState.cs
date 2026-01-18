@@ -6,6 +6,7 @@ public class MonsterChaseState : StateMachineBehaviour
 
     NavMeshAgent agent;
     Transform player;
+    Enemy enemyScript;
 
     public float chaseSpeed = 6f;
 
@@ -18,15 +19,17 @@ public class MonsterChaseState : StateMachineBehaviour
         player = GameObject.FindGameObjectWithTag("Player").transform;
         agent = animator.GetComponent<NavMeshAgent>();
 
+        enemyScript = animator.GetComponent<Enemy>();
+
         agent.speed = chaseSpeed;
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
 
-        if (SoundManager.Instance.monsterChannel.isPlaying == false)
+        if (enemyScript.myAudioSource.isPlaying == false)
         {
-            SoundManager.Instance.monsterChannel.PlayOneShot(SoundManager.Instance.monsterChase);
+            enemyScript.myAudioSource.PlayOneShot(enemyScript.monsterChase);
         }
 
         agent.SetDestination(player.position);
@@ -53,6 +56,6 @@ public class MonsterChaseState : StateMachineBehaviour
     {
         agent.SetDestination(animator.transform.position);
 
-        SoundManager.Instance.monsterChannel.Stop();
+        enemyScript.myAudioSource.Stop();
     }
 }

@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 6f;
     public float sprintSpeed = 10f;
     public float acceleration = 12f;
+    public float berserkSpeedMultiplier = 1.5f;
 
     [Header("Jump & Gravity")]
     public float jumpHeight = 2.2f;
@@ -48,10 +49,13 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] private Animator animator;
 
+    private Player player;
+
     void Start()
     {
         controller = GetComponent<CharacterController>();
         animator = GetComponentInChildren<Animator>();
+        player = GetComponent<Player>();
 
         currentStamina = maxStamina;
 
@@ -81,6 +85,11 @@ public class PlayerMovement : MonoBehaviour
 
     void HandleMouseLook()
     {
+        if (LevelManager.Instance != null && LevelManager.Instance.isPaused)
+        {
+            return;
+        }
+
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity;
 
@@ -100,7 +109,10 @@ public class PlayerMovement : MonoBehaviour
 
         isSprinting = Input.GetKey(KeyCode.LeftShift) && canSprint && z > 0.1f && inputDir.magnitude > 0.1f;
 
-        float targetSpeed = isSprinting ? sprintSpeed : walkSpeed;
+        float currentWalkSpeed = player.isBerserkActive ? walkSpeed * berserkSpeedMultiplier : walkSpeed;
+        float currentSprintSpeed = player.isBerserkActive ? sprintSpeed * berserkSpeedMultiplier : sprintSpeed;
+
+        float targetSpeed = isSprinting ? currentSprintSpeed : currentWalkSpeed;
         Vector3 targetVelocity = inputDir * targetSpeed;
 
         currentMoveVelocity = Vector3.Lerp(currentMoveVelocity, targetVelocity, acceleration * Time.deltaTime);

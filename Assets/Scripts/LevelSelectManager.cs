@@ -39,4 +39,11 @@ public class LevelSelectManager : MonoBehaviour
         string levelName = "Level" + index;
         SceneManager.LoadScene(levelName);
     }
+
+    public void ExitToMenu()
+    {
+        // Resume the game and return to main menu
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
 }

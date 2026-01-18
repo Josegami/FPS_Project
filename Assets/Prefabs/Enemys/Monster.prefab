@@ -1432,6 +1432,12 @@ MonoBehaviour:
   isDead: 0
   heartPrefab: {fileID: 6768607106082462014, guid: 858e4b834fcabc44bad9be85a504b56c, type: 3}
   dropChance: 25
+  myAudioSource: {fileID: 6026065900575052228}
+  monsterWalking: {fileID: 8300000, guid: 168c9a5ac7025814ea9c89e5098a3cad, type: 3}
+  monsterChase: {fileID: 8300000, guid: e1e7f406c66d0c34f94726e83f3b5cbd, type: 3}
+  monsterAttack: {fileID: 8300000, guid: b771cd0787c16e64e8e8ba11c3c83734, type: 3}
+  monsterHurt: {fileID: 8300000, guid: 12e7285fa38aaf943a0ed8c7f3c684eb, type: 3}
+  monsterDeath: {fileID: 8300000, guid: 9df77b70cadc8384ca073a95aebc666f, type: 3}
 --- !u!195 &7820511306697424094
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1500,7 +1506,7 @@ AudioSource:
   m_GameObject: {fileID: 6711096690386049596}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f7a72b2636dcc2f48974d14891d0f639, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0

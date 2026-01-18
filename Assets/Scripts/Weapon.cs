@@ -81,6 +81,11 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
+        if (LevelManager.Instance != null && LevelManager.Instance.isPaused)
+        {
+            return;
+        }
+
         // Update visuals only when state changes (Fixes crashes)
         if (isActiveWeapon != lastActiveState)
         {
@@ -260,7 +265,6 @@ public class Weapon : MonoBehaviour
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
-        // Gán c?ng layer
         int ignoreWeaponMask = ~LayerMask.GetMask("WeaponRender");
 
         Vector3 targetPoint;

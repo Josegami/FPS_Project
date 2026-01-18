@@ -18,11 +18,23 @@ public class Enemy : MonoBehaviour
     public GameObject heartPrefab;
     [Range(0, 100)] public float dropChance = 25f;
 
+    [Header("Audio Local (Nuevo)")]
+    public AudioSource myAudioSource;
+
+    public AudioClip monsterWalking;
+    public AudioClip monsterChase;
+    public AudioClip monsterAttack;
+    public AudioClip monsterHurt;
+    public AudioClip monsterDeath;
     private void Start()
     {
         animator = GetComponent<Animator>();
         navAgent = GetComponent<NavMeshAgent>();
         enemyCollider = GetComponent<Collider>();
+
+        monsterHand = GetComponentInChildren<MonsterHand>();
+
+        myAudioSource = GetComponent<AudioSource>();
     }
 
     public void TakeDamage(int damageAmount)
@@ -34,6 +46,12 @@ public class Enemy : MonoBehaviour
         if (HP <= 0)
         {
             isDead = true;
+
+            Player player = FindObjectOfType<Player>();
+            if (player != null)
+            {
+                player.AddBerserkCharge();
+            }
 
             if (animator != null)
             {
@@ -49,12 +67,14 @@ public class Enemy : MonoBehaviour
                 monsterHand.GetComponent<Collider>().enabled = false;
             }
 
-            if (SoundManager.Instance != null)
+            if (myAudioSource != null)
             {
-                SoundManager.Instance.monsterChannel2.PlayOneShot(SoundManager.Instance.monsterDeath);
+                myAudioSource.PlayOneShot(monsterDeath);
             }
 
             SpawnLoot();
+
+            Destroy(gameObject, 5f);
         }
         else
         {
@@ -64,9 +84,9 @@ public class Enemy : MonoBehaviour
                 animator.SetBool("isChasing", true);
             }
 
-            if (SoundManager.Instance != null)
+            if (myAudioSource != null)
             {
-                SoundManager.Instance.monsterChannel2.PlayOneShot(SoundManager.Instance.monsterHurt);
+                myAudioSource.PlayOneShot(monsterHurt);
             }
         }
     }

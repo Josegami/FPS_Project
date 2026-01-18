@@ -32,6 +32,16 @@ public class HealthHeart : MonoBehaviour
                     Destroy(gameObject);
                 });
             }
+
+            PlayerInfinite playerInf = other.GetComponent<PlayerInfinite>();
+            if (playerInf != null)
+            {
+                playerInf.Heal(healthAmount);
+
+                transform.DOScale(0, 0.2f).OnComplete(() => {
+                    Destroy(gameObject);
+                });
+            }
         }
     }
 }

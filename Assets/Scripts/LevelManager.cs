@@ -2,10 +2,20 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using DG.Tweening.Core.Easing;
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance;
+
+    [Header("Escape Menu Settings")]
+    public GameObject escapeMenuPanel;
+    public bool isPaused = false;
+
+    [Header("Audio Settings")]
+    public AudioMixer masterMixer; 
+    public Slider volumeSlider;   
 
     /// <summary>
     /// Gets the numerical index of the current level from the scene name (e.g., "Level3" -> 3).
@@ -31,6 +41,13 @@ public class LevelManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        float currentVol;
+        masterMixer.GetFloat("MasterVolume", out currentVol);
+        if (volumeSlider != null) volumeSlider.value = Mathf.Pow(10, currentVol / 20);
+    }
+
     private void Awake()
     {
         // Singleton Implementation
@@ -44,6 +61,49 @@ public class LevelManager : MonoBehaviour
         // LevelManager is scene-specific, so DontDestroyOnLoad is not used here.
     }
 
+    private void Update()
+    {
+        // Toggle pause menu with Escape key
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (isPaused)
+            {
+                ResumeGame();
+            }
+            else
+            {
+                PauseGame();
+            }
+        }
+    }
+
+    public void SetVolume(float sliderValue)
+    {
+        masterMixer.SetFloat("MasterVolume", Mathf.Log10(sliderValue) * 20);
+    }
+
+    public void PauseGame()
+    {
+        isPaused = true;
+        if (escapeMenuPanel != null) escapeMenuPanel.SetActive(true);
+        Time.timeScale = 0f;
+
+        // Unlock cursor for menu navigation
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void ResumeGame()
+    {
+        isPaused = false;
+        if (escapeMenuPanel != null) escapeMenuPanel.SetActive(false);
+        Time.timeScale = 1f;
+
+        // Lock cursor back for gameplay
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
     /// <summary>
     /// Checks the current level and saves the next level as the maximum unlocked level.
     /// </summary>
@@ -53,22 +113,25 @@ public class LevelManager : MonoBehaviour
         int nextLevelToUnlock = currentLevel + 1;
 
         // 1. Get the current maximum unlocked level (default is 1 if key doesn't exist)
-        int currentMaxUnlocked = PlayerPrefs.GetInt(GameConstants.MAXLEVEL_KEY, 1);
+        int currentMaxUnlocked = PlayerPrefs.GetInt("MAXLEVEL_KEY", 1);
 
         // 2. If the next level is higher than the current max, update PlayerPrefs
         if (nextLevelToUnlock > currentMaxUnlocked)
         {
-            PlayerPrefs.SetInt(GameConstants.MAXLEVEL_KEY, nextLevelToUnlock);
+            PlayerPrefs.SetInt("MAXLEVEL_KEY", nextLevelToUnlock);
             PlayerPrefs.Save(); // Save data to disk
             Debug.Log($"New maximum level unlocked: Level {nextLevelToUnlock}");
         }
     }
 
-    //             BUTTONS
+    //              BUTTONS
     public void NextLevel()
     {
         // Resume the game
         Time.timeScale = 1f;
+
+        UnlockNextLevel(); // Unlock before loading
+
         int nextLevelIndex = CurrentLevelIndex + 1;
         string nextLevelName = "Level" + nextLevelIndex;
 

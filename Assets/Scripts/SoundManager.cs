@@ -18,15 +18,6 @@ public class SoundManager : MonoBehaviour
     public AudioSource throwablesChannel;
     public AudioClip grenadeSound;
 
-    public AudioSource monsterChannel;
-    public AudioSource monsterChannel2;
-
-    public AudioClip monsterWalking;
-    public AudioClip monsterChase;
-    public AudioClip monsterAttack;
-    public AudioClip monsterHurt;
-    public AudioClip monsterDeath;
-
     public AudioSource playerChannel;
     public AudioClip playerHurt;
     public AudioClip playerDie;

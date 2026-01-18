@@ -60,13 +60,6 @@ MonoBehaviour:
   emptyMagazineSound1911: {fileID: 1674115940088027014}
   throwablesChannel: {fileID: 2466227032715515154}
   grenadeSound: {fileID: 8300000, guid: 020745dc5d0ecab4882c7519cbcb1373, type: 3}
-  monsterChannel: {fileID: 0}
-  monsterChannel2: {fileID: 0}
-  monsterWalking: {fileID: 8300000, guid: 168c9a5ac7025814ea9c89e5098a3cad, type: 3}
-  monsterChase: {fileID: 8300000, guid: e1e7f406c66d0c34f94726e83f3b5cbd, type: 3}
-  monsterAttack: {fileID: 8300000, guid: bc2baab908f1b004691a6ecf7044f61c, type: 3}
-  monsterHurt: {fileID: 8300000, guid: b771cd0787c16e64e8e8ba11c3c83734, type: 3}
-  monsterDeath: {fileID: 8300000, guid: 9df77b70cadc8384ca073a95aebc666f, type: 3}
   playerChannel: {fileID: 2953434023372123610}
   playerHurt: {fileID: 8300000, guid: f54c200dfb088a149ad1b5082827c330, type: 3}
   playerDie: {fileID: 8300000, guid: e443be705ff37f74c8c05ec4de73bc96, type: 3}
@@ -81,7 +74,7 @@ AudioSource:
   m_GameObject: {fileID: 1181778915177289523}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f7a72b2636dcc2f48974d14891d0f639, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -178,7 +171,7 @@ AudioSource:
   m_GameObject: {fileID: 1181778915177289523}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f7a72b2636dcc2f48974d14891d0f639, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: 1a2246b40b06424458f5a36efee05b67, type: 3}
   m_PlayOnAwake: 0
@@ -275,7 +268,7 @@ AudioSource:
   m_GameObject: {fileID: 1181778915177289523}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f7a72b2636dcc2f48974d14891d0f639, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: cf22409ed4f35fe46824114e974e1107, type: 3}
   m_PlayOnAwake: 0
@@ -372,7 +365,7 @@ AudioSource:
   m_GameObject: {fileID: 1181778915177289523}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f7a72b2636dcc2f48974d14891d0f639, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: aa0b4cf6687a26640a8ac63c2599170d, type: 3}
   m_PlayOnAwake: 0
@@ -469,7 +462,7 @@ AudioSource:
   m_GameObject: {fileID: 1181778915177289523}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f7a72b2636dcc2f48974d14891d0f639, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -566,7 +559,7 @@ AudioSource:
   m_GameObject: {fileID: 1181778915177289523}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f7a72b2636dcc2f48974d14891d0f639, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -663,7 +656,7 @@ AudioSource:
   m_GameObject: {fileID: 1181778915177289523}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f7a72b2636dcc2f48974d14891d0f639, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -760,7 +753,7 @@ AudioSource:
   m_GameObject: {fileID: 1181778915177289523}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 24300002, guid: f7a72b2636dcc2f48974d14891d0f639, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
   m_PlayOnAwake: 0
@@ -1042,6 +1035,7 @@ MonoBehaviour:
   grenadeExplosionEffect: {fileID: 100006, guid: 4575df893a6e3f64a8283dee38413a34, type: 3}
   smokeGrenadeEffect: {fileID: 100000, guid: 4ecfa3d3919108f4fbff80d1c4d920a1, type: 3}
   bloodSprayEffect: {fileID: 5566125407317051687, guid: db2b0b14a81d62d47a3b6a354cf09c7b, type: 3}
+  waveNumber: 0
 --- !u!1 &7178243774022951293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1086,6 +1080,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 331027dca8d957d4896c13b1b4f715ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  escapeMenuPanel: {fileID: 0}
+  isPaused: 0
+  masterMixer: {fileID: 24100000, guid: f7a72b2636dcc2f48974d14891d0f639, type: 2}
+  volumeSlider: {fileID: 0}
 --- !u!1 &8201680701179482489
 GameObject:
   m_ObjectHideFlags: 0
