@@ -1,5 +1,5 @@
-👽 A.I. Xeno Invasion -- 
-A.I. Xeno Invasion es un shooter futurista que consta con varios modos de juego. Enfrenta hordas de aliens en una estación espacial con un sistema de combate pulido y gestión de progresión automática.
+👽 A.I. Vector Xeno Invasion -- 
+A.I. Vector Xeno Invasion es un shooter futurista que consta con varios modos de juego. Enfrenta hordas de aliens en una estación espacial con un sistema de combate pulido y gestión de progresión automática.
 
 🕹️ Mecánicas Principales --
 Combate Avanzado: Modos de disparo (Auto, Single, Burst), apuntado (ADS) y sistema de recarga funcional.
